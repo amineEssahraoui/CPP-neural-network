@@ -2,6 +2,7 @@
 #include <iostream>
 #include <ctime> 
 #include <random>
+#include <iomanip>
 
 Matrix::Matrix(int r , int c){
     this->rows = r; 
@@ -53,5 +54,15 @@ void Matrix::randomize() {
     for (int i=0; i<this->data.size(); i++) {
         double random_number = distr(gen);
         this->data[i] = random_number ; 
+    }
+}
+
+void Matrix::print() const {
+
+    for (int i = 0; i < this->rows; i++) {
+        for (int j = 0; j < this->cols; j++) {
+            std::cout << std::setw(10) << std::fixed << std::setprecision(4) << this->at(i, j);
+        }
+        std::cout << std::endl;
     }
 }
