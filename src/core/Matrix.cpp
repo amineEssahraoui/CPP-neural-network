@@ -35,4 +35,13 @@ Matrix Matrix::dot(const Matrix& other) {
     return Result ; 
 }
 
-
+void Matrix::add(const Matrix& other) {
+    if (!(this->rows==other.rows && this->cols==other.cols)) {
+        cerr << "Error: Invalid dimensions for matrix addition!" << endl;
+        return ; 
+    }
+    
+    for (int i = 0; i < this->data.size(); i++) {
+        this->data[i] += other.data[i];
+    }
+}
