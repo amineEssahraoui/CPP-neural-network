@@ -14,6 +14,8 @@ int main () {
     Matrix C = A.dot(B) ; 
     cout <<"C matrix :" << endl; C.print(); cout << endl;
     Matrix bias(2,2) ;
+    bias.randomize(); 
+    cout <<"Bias matrix :" << endl; bias.print(); cout << endl; 
     C.add(bias); 
     cout <<"C matrix plus bias :" << endl; C.print(); cout << endl;
     return 0; 
