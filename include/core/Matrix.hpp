@@ -18,7 +18,8 @@ class Matrix {
     void add(const Matrix& other); 
 
     // Getters , helpers : 
-    double at(int r , int c) const; 
+    double at(int r , int c) const; // The correct position in flaty array for an element in [r,c]
+    void randomize(); 
     void print() const; 
 } ; 
 
