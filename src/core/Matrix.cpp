@@ -45,3 +45,13 @@ void Matrix::add(const Matrix& other) {
         this->data[i] += other.data[i];
     }
 }
+
+void Matrix::randomize() {
+    static int seed = 42; // Fixed seed in the first time for a simple debug ! 
+    static mt19937 gen(seed); 
+    uniform_real_distribution<double> distr(-1.0 , 1.0); 
+    for (int i=0; i<this->data.size(); i++) {
+        double random_number = distr(gen);
+        this->data[i] = random_number ; 
+    }
+}
