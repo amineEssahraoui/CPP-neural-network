@@ -26,12 +26,25 @@ The following activation functions and their respective derivatives are implemen
 * **Function**: $f(x) = \tanh(x)$
 * **Derivative**: $f'(x) = 1 - f(x)^2$
 
+### 4. CELU (Continuously Differentiable Exponential Linear Unit)
+* **Function**: $f(x) = \max(0, x) + \min(0, \alpha \cdot (e^{x/\alpha} - 1))$
+* **Derivative**: $f'(x) = \begin{cases} 1 & \text{if } x \geq 0 \\ e^{x/\alpha} & \text{if } x < 0 \end{cases}$
+
+### 5. ELU (Exponential Linear Unit)
+* **Function**: $f(x) = \begin{cases} x & \text{if } x \geq 0 \\ \alpha \cdot (e^x - 1) & \text{if } x < 0 \end{cases}$
+* **Derivative**: $f'(x) = \begin{cases} 1 & \text{if } x \geq 0 \\ \alpha \cdot e^x & \text{if } x < 0 \end{cases}$
+
 ## Project Structure
 
 * `include/core/`: Matrix logic and linear algebra operations.
 * `include/Activation/`: Activation function definitions and implementations.
 * `include/layers/`: Neural network layer abstractions.
 * `src/`: Source files for core functionality.
+
+## Coming Soon
+* Softmax activation, logsigmoid..., and advanced loss functions (MSE, Cross-Entropy...).
+* Backpropagation logic and Optimizer implementations (SGD, Adam...).
+* Comprehensive model training and evaluation examples.
 
 ## Compilation and Execution
 
