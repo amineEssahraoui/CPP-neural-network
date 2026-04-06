@@ -8,7 +8,7 @@ namespace Layers {
     template <typename ActivationType> 
     class DenseLayer {
         public : 
-            Matrix weghits; 
+            Matrix weights; 
             Matrix bias; 
             ActivationType activation; 
 
