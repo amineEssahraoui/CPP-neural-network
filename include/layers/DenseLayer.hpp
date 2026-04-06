@@ -18,4 +18,6 @@ namespace Layers {
     };
 }
 
+#include "DenseLayer.tpp"
+
 #endif
