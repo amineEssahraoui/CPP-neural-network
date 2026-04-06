@@ -3,13 +3,26 @@
 
 #include "Activation.hpp"
 #include <cmath>
+#include <stdexcept> 
 
 namespace Activation {
     class Celu : public ActivationFunction<Celu> {
+    private:
+        double alpha; 
     public:
-        double alpha;
+        Celu(double a = 1.0) {
+            setAlpha(a);
+        }
 
-        Celu(double a = 1.0) : alpha(a) {}
+        void setAlpha(double a) {
+            if (a == 0) {
+                this->alpha = 1e-7; 
+            } else {
+                this->alpha = a;
+            }
+        }
+
+        double getAlpha() const { return alpha; }
 
         double apply(double x) const {
             return (x >= 0) ? x : alpha * (std::exp(x / alpha) - 1.0);
