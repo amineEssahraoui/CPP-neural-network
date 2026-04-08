@@ -72,3 +72,12 @@ void Matrix::subtract(const Matrix& other) {
         this->data[i] -= other.data[i]; 
     }
 }
+
+Matrix Matrix::multiply(const Matrix& other) const{
+    Matrix result(other.rows, other.cols); 
+    for (int i=0; i<result.data.size(); i++) {
+        result.data[i] = this->data[i] * other.data[i]; 
+    }
+    return result; 
+}
+
