@@ -68,16 +68,38 @@ void Matrix::print() const {
 }
 
 void Matrix::subtract(const Matrix& other) {
-    for(int i=0; i<this->data.size(); i++) {
+    // Check dimensions first!
+    if (this->rows != other.rows || this->cols != other.cols) {
+        std::cerr << "Error: Dimensions mismatch for subtraction!" << std::endl;
+        return;
+    }
+    for(size_t i = 0; i < this->data.size(); i++) {
         this->data[i] -= other.data[i]; 
     }
 }
 
-Matrix Matrix::multiply(const Matrix& other) const{
-    Matrix result(other.rows, other.cols); 
-    for (int i=0; i<result.data.size(); i++) {
+Matrix Matrix::multiply(const Matrix& other) const {
+    if (this->rows != other.rows || this->cols != other.cols) {
+        std::cerr << "Error: Dimensions mismatch for element-wise multiplication!" << std::endl;
+        return Matrix(0, 0);
+    }
+    Matrix result(this->rows, this->cols); 
+    for (size_t i = 0; i < result.data.size(); i++) {
         result.data[i] = this->data[i] * other.data[i]; 
     }
     return result; 
 }
 
+Matrix Matrix::transpose() const {
+    // New dimensions: Rows become Cols, Cols become Rows
+    Matrix transpose_matrix(this->cols, this->rows); 
+
+    for (int i = 0; i < this->rows; i++) {
+        for (int j = 0; j < this->cols; j++) {
+            // Element at (i, j) in original goes to (j, i) in transposed
+            // Index in transposed: j * transposed_cols + i (where transposed_cols is original this->rows)
+            transpose_matrix.data[j * this->rows + i] = this->at(i, j); 
+        }
+    }
+    return transpose_matrix; 
+}
