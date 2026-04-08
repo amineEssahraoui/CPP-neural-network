@@ -1,7 +1,6 @@
 #ifndef MAE_HPP
 #define MAE_HPP
 
-#include <cmath>
 #include "Loss.hpp"
 
 namespace Loss {
@@ -13,7 +12,7 @@ namespace Loss {
             size_t size_data = predicted.data.size();
 
             for (size_t i = 0; i < size_data; i++) {
-                error += abs(predicted.data[i] - target.data[i]);
+                error += std::abs(predicted.data[i] - target.data[i]);
             }
 
             return error / static_cast<double>(size_data);
@@ -26,9 +25,11 @@ namespace Loss {
             for (size_t i = 0; i < grad.data.size(); i++) {
                 double diff = predicted.data[i] - target.data[i];
                 if (diff > 0) {
-                    grad.data[i] = 1.0/n ;  
+                    grad.data[i] = 1.0/n;  
+                } else if (diff < 0) {
+                    grad.data[i] = -1.0/n;  
                 } else {
-                    grad.data[i] = -1.0/n ;  
+                    grad.data[i] = 0; 
                 }
             }
             return grad;
