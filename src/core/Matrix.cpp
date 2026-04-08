@@ -15,7 +15,7 @@ double Matrix::at(int r, int c) const{
     return this->data[index] ; 
 }
 
-Matrix Matrix::dot(const Matrix& other) {
+Matrix Matrix::dot(const Matrix& other) const{
     // checking dim : 
     if (this->cols != other.rows) {
         cerr << "Error: Dimensions mismatch for dot product!" << endl ; 
