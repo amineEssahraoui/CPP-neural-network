@@ -14,7 +14,7 @@ class Matrix {
     Matrix(int r , int c); 
 
     // Core operations : 
-    Matrix dot(const Matrix& other); 
+    Matrix dot(const Matrix& other) const; 
     void add(const Matrix& other); 
 
     // Getters , helpers : 

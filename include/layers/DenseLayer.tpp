@@ -12,7 +12,8 @@ namespace Layers {
     template <typename ActivationType>
     Matrix DenseLayer<ActivationType>::forward(const Matrix& input) {
         // Z = X.W + b
-        Matrix Z = input.dot(this->weights);
+        Matrix Z(input.rows, input.cols);
+        Z = input.dot(this->weights); 
         Z.add(this->bias);
         // A = f(Z)
         return this->activation.apply_matrix(Z);
