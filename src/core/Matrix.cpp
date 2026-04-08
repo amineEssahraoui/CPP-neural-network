@@ -66,3 +66,9 @@ void Matrix::print() const {
         std::cout << std::endl;
     }
 }
+
+void Matrix::subtract(const Matrix& other) {
+    for(int i=0; i<this->data.size(); i++) {
+        this->data[i] -= other.data[i]; 
+    }
+}
