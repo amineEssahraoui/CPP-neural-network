@@ -10,6 +10,7 @@
                 "${workspaceFolder}/main.cpp",
                 "${workspaceFolder}/src/core/Matrix.cpp",
                 "${workspaceFolder}/src/model/Network.cpp",
+                "${workspaceFolder}/src/Optimizers/SGD.cpp",
                 "-I", "${workspaceFolder}/include",
                 "-o",
                 "${workspaceFolder}/main.exe"
