@@ -103,3 +103,11 @@ Matrix Matrix::transpose() const {
     }
     return transpose_matrix; 
 }
+
+Matrix Matrix::multiply_by_elemnt(const double element) const{
+    Matrix Result(this->rows, this->cols); 
+    for(int i=0; i<this->data.size(); i++){
+        Result.data[i] = this->data[i] * element ; 
+    }
+    return Result; 
+}
