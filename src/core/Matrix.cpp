@@ -36,7 +36,7 @@ Matrix Matrix::dot(const Matrix& other) const{
     return Result ; 
 }
 
-void Matrix::add(const Matrix& other) {
+void Matrix::add_inplace(const Matrix& other) {
     if (!(this->rows==other.rows && this->cols==other.cols)) {
         cerr << "Error: Invalid dimensions for matrix addition!" << endl;
         return ; 
@@ -67,7 +67,7 @@ void Matrix::print() const {
     }
 }
 
-void Matrix::subtract(const Matrix& other) {
+void Matrix::subtract_inplace(const Matrix& other) {
     // Check dimensions first!
     if (this->rows != other.rows || this->cols != other.cols) {
         std::cerr << "Error: Dimensions mismatch for subtraction!" << std::endl;
