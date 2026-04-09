@@ -13,13 +13,18 @@ class Matrix {
     // Constructors : 
     Matrix(int r , int c); 
 
-    // Core operations : 
+    // Core operations (new result): 
     Matrix dot(const Matrix& other) const; 
-    void add(const Matrix& other); 
-    void subtract(const Matrix& other); 
+    Matrix add(const Matrix& other) const;         
+    Matrix subtract(const Matrix& other) const;     
     Matrix multiply(const Matrix& other) const; 
     Matrix transpose() const; 
-    Matrix multiply_by_elemnt(const double element) const; 
+    Matrix multiply_by_elemnt(const double element) const;
+
+    // Core operations (inplace : change the original matrix): 
+    void add_inplace(const Matrix& other); 
+    void subtract_inplace(const Matrix& other); 
+    void subtract_scaled(const Matrix& other, double scalar);
 
     // Getters , helpers : 
     double at(int r , int c) const; // The correct position in flaty array for an element in [r,c]
