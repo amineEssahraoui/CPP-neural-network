@@ -19,6 +19,7 @@ class Matrix {
     void subtract(const Matrix& other); 
     Matrix multiply(const Matrix& other) const; 
     Matrix transpose() const; 
+    Matrix multiply_by_elemnt(const double element) const; 
 
     // Getters , helpers : 
     double at(int r , int c) const; // The correct position in flaty array for an element in [r,c]
