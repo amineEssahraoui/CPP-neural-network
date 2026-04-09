@@ -4,15 +4,38 @@
 #include <random>
 #include <iomanip>
 
+// Constructor 
+
 Matrix::Matrix(int r , int c){
     this->rows = r; 
     this->cols = c; 
     this->data.resize(r*c , 0.0);
 }
 
-double Matrix::at(int r, int c) const{
-    int index = r*this->cols + c; 
-    return this->data[index] ; 
+// Operations (new result)
+
+Matrix Matrix::add(const Matrix& other) const {
+    if (this->rows != other.rows || this->cols != other.cols) {
+        std::cerr << "Error: Dimensions mismatch for addition operation !!" << std::endl;
+        return Matrix(0, 0);
+    }
+    Matrix Result(this->rows, this->cols); 
+    for (int i=0; i<this->data.size(); i++) {
+        Result.data[i] = this->data[i] + other.data[i]; 
+    }
+    return Result; 
+}
+
+Matrix Matrix::subtract(const Matrix& other) const {
+    if (this->rows != other.rows || this->cols != other.cols) {
+        std::cerr << "Error: Dimensions mismatch for substraction operation !!" << std::endl;
+        return Matrix(0, 0);
+    }
+    Matrix Result(this->rows, this->cols); 
+    for (int i=0; i<this->data.size(); i++) {
+        Result.data[i] = this->data[i] - other.data[i]; 
+    }
+    return Result; 
 }
 
 Matrix Matrix::dot(const Matrix& other) const{
@@ -34,48 +57,6 @@ Matrix Matrix::dot(const Matrix& other) const{
         }
     }
     return Result ; 
-}
-
-void Matrix::add_inplace(const Matrix& other) {
-    if (!(this->rows==other.rows && this->cols==other.cols)) {
-        cerr << "Error: Invalid dimensions for matrix addition!" << endl;
-        return ; 
-    }
-    
-    for (int i = 0; i < this->data.size(); i++) {
-        this->data[i] += other.data[i];
-    }
-}
-
-void Matrix::randomize() {
-    static int seed = 42; // Fixed seed in the first time for a simple debug ! 
-    static mt19937 gen(seed); 
-    uniform_real_distribution<double> distr(-1.0 , 1.0); 
-    for (int i=0; i<this->data.size(); i++) {
-        double random_number = distr(gen);
-        this->data[i] = random_number ; 
-    }
-}
-
-void Matrix::print() const {
-
-    for (int i = 0; i < this->rows; i++) {
-        for (int j = 0; j < this->cols; j++) {
-            std::cout << std::setw(10) << std::fixed << std::setprecision(4) << this->at(i, j);
-        }
-        std::cout << std::endl;
-    }
-}
-
-void Matrix::subtract_inplace(const Matrix& other) {
-    // Check dimensions first!
-    if (this->rows != other.rows || this->cols != other.cols) {
-        std::cerr << "Error: Dimensions mismatch for subtraction!" << std::endl;
-        return;
-    }
-    for(size_t i = 0; i < this->data.size(); i++) {
-        this->data[i] -= other.data[i]; 
-    }
 }
 
 Matrix Matrix::multiply(const Matrix& other) const {
@@ -104,10 +85,73 @@ Matrix Matrix::transpose() const {
     return transpose_matrix; 
 }
 
-Matrix Matrix::multiply_by_elemnt(const double element) const{
+Matrix Matrix::multiply_by_element(const double element) const{
     Matrix Result(this->rows, this->cols); 
     for(int i=0; i<this->data.size(); i++){
         Result.data[i] = this->data[i] * element ; 
     }
     return Result; 
 }
+
+// Inplace operation 
+
+void Matrix::add_inplace(const Matrix& other) {
+    if (!(this->rows==other.rows && this->cols==other.cols)) {
+        cerr << "Error: Invalid dimensions for matrix addition!" << endl;
+        return ; 
+    }
+    
+    for (int i = 0; i < this->data.size(); i++) {
+        this->data[i] += other.data[i];
+    }
+}
+
+void Matrix::subtract_inplace(const Matrix& other) {
+    // Check dimensions first!
+    if (this->rows != other.rows || this->cols != other.cols) {
+        std::cerr << "Error: Dimensions mismatch for subtraction!" << std::endl;
+        return;
+    }
+    for(size_t i = 0; i < this->data.size(); i++) {
+        this->data[i] -= other.data[i]; 
+    }
+}
+
+void Matrix::subtract_scaled(const Matrix& other, double scalar) {
+    if (this->rows != other.rows || this->cols != other.cols) {
+        std::cerr << "Error: Dimensions mismatch for subtraction scaled operation!" << std::endl;
+        return;
+    }
+    for (int i=0; i<this->data.size(); i++) {
+        this->data[i] -= scalar * other.data[i]; 
+    }
+}
+
+// Getters , helpers : 
+
+void Matrix::randomize() {
+    static int seed = 42; // Fixed seed in the first time for a simple debug ! 
+    static mt19937 gen(seed); 
+    uniform_real_distribution<double> distr(-1.0 , 1.0); 
+    for (int i=0; i<this->data.size(); i++) {
+        double random_number = distr(gen);
+        this->data[i] = random_number ; 
+    }
+}
+
+void Matrix::print() const {
+
+    for (int i = 0; i < this->rows; i++) {
+        for (int j = 0; j < this->cols; j++) {
+            std::cout << std::setw(10) << std::fixed << std::setprecision(4) << this->at(i, j);
+        }
+        std::cout << std::endl;
+    }
+}
+
+
+double Matrix::at(int r, int c) const{
+    int index = r*this->cols + c; 
+    return this->data[index] ; 
+}
+
