@@ -19,7 +19,7 @@ class Matrix {
     Matrix subtract(const Matrix& other) const;     
     Matrix multiply(const Matrix& other) const; 
     Matrix transpose() const; 
-    Matrix multiply_by_elemnt(const double element) const;
+    Matrix multiply_by_element(const double element) const;
 
     // Core operations (inplace : change the original matrix): 
     void add_inplace(const Matrix& other); 
